@@ -12,7 +12,7 @@ export class CreateUserUseCase implements ICreateUserUseCase {
     const userId = uuidv4();
     const hashdePassword = await bcrypt.hash(createUserParams.password, 10);
 
-    const user = {
+    const user: CreateUserParams = {
       ...createUserParams,
       id: userId,
       password: hashdePassword,
