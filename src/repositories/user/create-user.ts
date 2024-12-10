@@ -1,5 +1,5 @@
 import { User } from "@prisma/client";
-import { IPostgresCreateUserRepository } from "../../interfaces/repositories/protocols";
+import { IPostgresCreateUserRepository } from "../../helpers/repositories/protocols";
 import { CreateUserParams } from "../../types/user";
 import { prisma } from "../../../prisma/prisma";
 
