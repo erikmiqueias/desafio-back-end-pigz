@@ -1,7 +1,7 @@
 import express from "express";
 import { config } from "dotenv";
 import { CreateUserController } from "./controllers/user/create-user";
-import { CreateUserUseCase } from "../use-case/user/create-user";
+import { CreateUserUseCase } from "./use-case/user/create-user";
 import { PostgresCreateUserRepository } from "./repositories/user/create-user";
 
 config();

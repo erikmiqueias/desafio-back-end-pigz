@@ -1,8 +1,8 @@
 import { User } from "@prisma/client";
-import { ICreateUserUseCase } from "../../src/helpers/use-case/protocols";
-import { CreateUserParams } from "../../src/types/user";
+import { ICreateUserUseCase } from "../../helpers/use-case/protocols";
+import { CreateUserParams } from "../../types/user";
 import { v4 as uuidv4 } from "uuid";
-import { IPostgresCreateUserRepository } from "../../src/helpers/repositories/protocols";
+import { IPostgresCreateUserRepository } from "../../helpers/repositories/protocols";
 import bcrypt from "bcrypt";
 export class CreateUserUseCase implements ICreateUserUseCase {
   constructor(
