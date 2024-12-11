@@ -24,6 +24,10 @@ export interface ICreateTaskController {
   ): Promise<HttpReponse<Tasks>>;
 }
 
+export interface ICompleteTaskController {
+  execute(taskId: string, is_completed: boolean): Promise<HttpReponse<Tasks>>;
+}
+
 export interface IDeleteListController {
   execute(listId: string): Promise<HttpReponse<Lists>>;
 }

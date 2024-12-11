@@ -12,6 +12,9 @@ import { CreateTaskController } from "./controllers/task/create-task";
 import { PostgresDeleteListRepository } from "./repositories/list/delete-list";
 import { DeleteListUseCase } from "./use-case/list/delete-list";
 import { DeleteListController } from "./controllers/list/delete-list";
+import { PostgresCompleteTaskRepository } from "./repositories/tasks/complete-task";
+import { CompleteTaskUseCase } from "./use-case/tasks/complete-task";
+import { CompleteTaskController } from "./controllers/task/complete-task";
 
 config();
 const app = express();
@@ -62,6 +65,23 @@ app.post("/lists/:id/tasks", async (req, res) => {
   const { statusCode, body } = await createTaskController.execute(
     req.params.id,
     req,
+  );
+
+  res.status(statusCode).send(body);
+});
+
+app.patch("/tasks/:id", async (req, res) => {
+  const completeTaskRepository = new PostgresCompleteTaskRepository();
+  const completeTaskUseCase = new CompleteTaskUseCase(completeTaskRepository);
+  const completeTaskController = new CompleteTaskController(
+    completeTaskUseCase,
+  );
+
+  console.log(req.body.is_completed);
+
+  const { statusCode, body } = await completeTaskController.execute(
+    req.params.id,
+    req.body.is_completed,
   );
 
   res.status(statusCode).send(body);
