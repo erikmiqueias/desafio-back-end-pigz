@@ -19,6 +19,10 @@ export interface IPostgresCompleteTaskRepository {
   execute(taskId: string, is_completed: boolean): Promise<Tasks>;
 }
 
+export interface IPostgresDeleteTaskRepository {
+  execute(taskId: string): Promise<Tasks>;
+}
+
 export interface IPostgresDeleteListRepository {
   execute(listId: string): Promise<Lists>;
 }
