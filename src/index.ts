@@ -6,6 +6,9 @@ import { PostgresCreateUserRepository } from "./repositories/user/create-user";
 import { PostgresCreateListRepository } from "./repositories/list/create-list";
 import { CreateListUseCase } from "./use-case/list/create-list";
 import { CreateListController } from "./controllers/list/create-list";
+import { PostgresCreateTaskRepository } from "./repositories/tasks/create-tasks";
+import { CreateTaskUseCase } from "./use-case/tasks/create-task";
+import { CreateTaskController } from "./controllers/task/create-task";
 
 config();
 const app = express();
@@ -29,6 +32,19 @@ app.post("/lists/:id", async (req, res) => {
   const createListController = new CreateListController(createListUseCase);
 
   const { statusCode, body } = await createListController.execute(
+    req.params.id,
+    req,
+  );
+
+  res.status(statusCode).send(body);
+});
+
+app.post("/lists/:id/tasks", async (req, res) => {
+  const createTaskRepository = new PostgresCreateTaskRepository();
+  const createTaskUseCase = new CreateTaskUseCase(createTaskRepository);
+  const createTaskController = new CreateTaskController(createTaskUseCase);
+
+  const { statusCode, body } = await createTaskController.execute(
     req.params.id,
     req,
   );
