@@ -26,3 +26,7 @@ export interface IDeleteTaskUseCase {
 export interface IDeleteListUseCase {
   execute(listId: string): Promise<Lists>;
 }
+
+export interface IShareListUseCase {
+  execute(listId: string, userId: string): Promise<Lists>;
+}
