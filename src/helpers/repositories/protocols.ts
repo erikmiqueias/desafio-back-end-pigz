@@ -26,3 +26,7 @@ export interface IPostgresDeleteTaskRepository {
 export interface IPostgresDeleteListRepository {
   execute(listId: string): Promise<Lists>;
 }
+
+export interface IPostgresShareListRepository {
+  execute(listId: string, userId: string): Promise<Lists>;
+}
