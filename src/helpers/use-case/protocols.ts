@@ -14,3 +14,7 @@ export interface ICreateListUseCase {
 export interface ICreateTaskUseCase {
   execute(listId: string, createTaskParams: CreateTaskParams): Promise<Tasks>;
 }
+
+export interface IDeleteListUseCase {
+  execute(listId: string): Promise<Lists>;
+}
