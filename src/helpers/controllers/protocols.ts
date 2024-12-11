@@ -23,3 +23,7 @@ export interface ICreateTaskController {
     httpRequest: HttpRequest<CreateTaskParams>,
   ): Promise<HttpReponse<Tasks>>;
 }
+
+export interface IDeleteListController {
+  execute(listId: string): Promise<HttpReponse<Lists>>;
+}

@@ -9,6 +9,9 @@ import { CreateListController } from "./controllers/list/create-list";
 import { PostgresCreateTaskRepository } from "./repositories/tasks/create-tasks";
 import { CreateTaskUseCase } from "./use-case/tasks/create-task";
 import { CreateTaskController } from "./controllers/task/create-task";
+import { PostgresDeleteListRepository } from "./repositories/list/delete-list";
+import { DeleteListUseCase } from "./use-case/list/delete-list";
+import { DeleteListController } from "./controllers/list/delete-list";
 
 config();
 const app = express();
@@ -34,6 +37,18 @@ app.post("/lists/:id", async (req, res) => {
   const { statusCode, body } = await createListController.execute(
     req.params.id,
     req,
+  );
+
+  res.status(statusCode).send(body);
+});
+
+app.delete("/lists/:id", async (req, res) => {
+  const deleteListRepository = new PostgresDeleteListRepository();
+  const deleteListUseCase = new DeleteListUseCase(deleteListRepository);
+  const deleteListController = new DeleteListController(deleteListUseCase);
+
+  const { statusCode, body } = await deleteListController.execute(
+    req.params.id,
   );
 
   res.status(statusCode).send(body);
