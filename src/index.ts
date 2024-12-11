@@ -18,6 +18,9 @@ import { CompleteTaskController } from "./controllers/task/complete-task";
 import { DeleteTaskController } from "./controllers/task/delete-task";
 import { PostgresDeleteTaskRepository } from "./repositories/tasks/delete-task";
 import { DeleteTaskUseCase } from "./use-case/tasks/delete-task";
+import { ShareListController } from "./controllers/list/share-list";
+import { PostgresShareListRepository } from "./repositories/list/share-list";
+import { ShareListUseCase } from "./use-case/list/share-list";
 
 config();
 const app = express();
@@ -95,6 +98,19 @@ app.delete("/tasks/:id", async (req, res) => {
 
   const { statusCode, body } = await deleteTaskController.execute(
     req.params.id,
+  );
+
+  res.status(statusCode).send(body);
+});
+
+app.patch("/lists/:id/share", async (req, res) => {
+  const shareListRepository = new PostgresShareListRepository();
+  const shareListUseCase = new ShareListUseCase(shareListRepository);
+  const shareListController = new ShareListController(shareListUseCase);
+
+  const { statusCode, body } = await shareListController.execute(
+    req.params.id,
+    req.body.user_id,
   );
 
   res.status(statusCode).send(body);

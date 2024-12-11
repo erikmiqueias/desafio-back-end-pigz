@@ -35,3 +35,7 @@ export interface IDeleteTaskController {
 export interface IDeleteListController {
   execute(listId: string): Promise<HttpReponse<Lists>>;
 }
+
+export interface IShareListController {
+  execute(listId: string, userId: string): Promise<HttpReponse<Lists>>;
+}
