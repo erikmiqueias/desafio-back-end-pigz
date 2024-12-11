@@ -19,6 +19,10 @@ export interface ICompleteTaskUseCase {
   execute(taskId: string, is_completed: boolean): Promise<Tasks>;
 }
 
+export interface IDeleteTaskUseCase {
+  execute(taskId: string): Promise<Tasks>;
+}
+
 export interface IDeleteListUseCase {
   execute(listId: string): Promise<Lists>;
 }
