@@ -14,3 +14,7 @@ export interface IPostgresCreateListRepository {
 export interface IPostgresCreateTaskRepository {
   execute(listId: string, params: CreateTaskParams): Promise<Tasks>;
 }
+
+export interface IPostgresDeleteListRepository {
+  execute(listId: string): Promise<Lists>;
+}
