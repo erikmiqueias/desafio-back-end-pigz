@@ -28,6 +28,10 @@ export interface ICompleteTaskController {
   execute(taskId: string, is_completed: boolean): Promise<HttpReponse<Tasks>>;
 }
 
+export interface IDeleteTaskController {
+  execute(taskId: string): Promise<HttpReponse<Tasks>>;
+}
+
 export interface IDeleteListController {
   execute(listId: string): Promise<HttpReponse<Lists>>;
 }

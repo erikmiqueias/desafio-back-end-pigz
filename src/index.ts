@@ -15,6 +15,9 @@ import { DeleteListController } from "./controllers/list/delete-list";
 import { PostgresCompleteTaskRepository } from "./repositories/tasks/complete-task";
 import { CompleteTaskUseCase } from "./use-case/tasks/complete-task";
 import { CompleteTaskController } from "./controllers/task/complete-task";
+import { DeleteTaskController } from "./controllers/task/delete-task";
+import { PostgresDeleteTaskRepository } from "./repositories/tasks/delete-task";
+import { DeleteTaskUseCase } from "./use-case/tasks/delete-task";
 
 config();
 const app = express();
@@ -77,11 +80,21 @@ app.patch("/tasks/:id", async (req, res) => {
     completeTaskUseCase,
   );
 
-  console.log(req.body.is_completed);
-
   const { statusCode, body } = await completeTaskController.execute(
     req.params.id,
     req.body.is_completed,
+  );
+
+  res.status(statusCode).send(body);
+});
+
+app.delete("/tasks/:id", async (req, res) => {
+  const deleteTaskRepository = new PostgresDeleteTaskRepository();
+  const deleteTaskUseCase = new DeleteTaskUseCase(deleteTaskRepository);
+  const deleteTaskController = new DeleteTaskController(deleteTaskUseCase);
+
+  const { statusCode, body } = await deleteTaskController.execute(
+    req.params.id,
   );
 
   res.status(statusCode).send(body);
