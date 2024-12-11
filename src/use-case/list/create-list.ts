@@ -15,7 +15,7 @@ export class CreateListUseCase implements ICreateListUseCase {
     const listData = createListParams;
     const listId = uuidv4();
 
-    if (userId) {
+    if (!userId) {
       throw new Error("An unknown error occurred");
     }
 

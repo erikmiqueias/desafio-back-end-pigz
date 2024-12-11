@@ -13,10 +13,23 @@ export class CreateListController implements ICreateListController {
     try {
       const listData = httpRequest.body;
 
+      const fields = ["list_name", "owner_id"];
+
       if (!listData) {
         return {
           statusCode: 400,
           body: "Missing parameters",
+        };
+      }
+
+      const missingFields = Object.keys(listData).some((key) =>
+        fields.includes(key),
+      );
+
+      if (!missingFields) {
+        return {
+          statusCode: 400,
+          body: `Missing fields: ${fields.join(", ")}`,
         };
       }
 

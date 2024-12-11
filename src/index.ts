@@ -3,6 +3,9 @@ import { config } from "dotenv";
 import { CreateUserController } from "./controllers/user/create-user";
 import { CreateUserUseCase } from "./use-case/user/create-user";
 import { PostgresCreateUserRepository } from "./repositories/user/create-user";
+import { PostgresCreateListRepository } from "./repositories/list/create-list";
+import { CreateListUseCase } from "./use-case/list/create-list";
+import { CreateListController } from "./controllers/list/create-list";
 
 config();
 const app = express();
@@ -16,6 +19,19 @@ app.post("/users", async (req, res) => {
   const createUserController = new CreateUserController(createUserUseCase);
 
   const { statusCode, body } = await createUserController.execute(req);
+
+  res.status(statusCode).send(body);
+});
+
+app.post("/lists/:id", async (req, res) => {
+  const createListRepository = new PostgresCreateListRepository();
+  const createListUseCase = new CreateListUseCase(createListRepository);
+  const createListController = new CreateListController(createListUseCase);
+
+  const { statusCode, body } = await createListController.execute(
+    req.params.id,
+    req,
+  );
 
   res.status(statusCode).send(body);
 });
