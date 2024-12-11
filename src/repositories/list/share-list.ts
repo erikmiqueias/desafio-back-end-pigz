@@ -1,11 +1,15 @@
-import { Lists } from "@prisma/client";
 import { IPostgresShareListRepository } from "../../helpers/repositories/protocols";
 import { prisma } from "../../../prisma/prisma";
+import { ShareListResponse } from "../../types/share-list";
 
 export class PostgresShareListRepository
   implements IPostgresShareListRepository
 {
-  async execute(listId: string, userId: string): Promise<Lists> {
+  async execute(
+    listId: string,
+    userId: string,
+    can_edit: boolean,
+  ): Promise<ShareListResponse> {
     const shareList = await prisma.lists.update({
       where: {
         id: listId,
@@ -14,11 +18,17 @@ export class PostgresShareListRepository
         ListShares: {
           create: {
             user_id: userId,
+            can_edit: can_edit,
           },
         },
       },
     });
 
-    return shareList;
+    return {
+      ...shareList,
+      list_id: shareList.id,
+      user_id: userId,
+      can_edit: can_edit,
+    };
   }
 }

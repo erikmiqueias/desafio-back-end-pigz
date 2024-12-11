@@ -111,6 +111,7 @@ app.patch("/lists/:id/share", async (req, res) => {
   const { statusCode, body } = await shareListController.execute(
     req.params.id,
     req.body.user_id,
+    req.body.can_edit,
   );
 
   res.status(statusCode).send(body);

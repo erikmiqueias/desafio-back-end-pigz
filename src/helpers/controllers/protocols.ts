@@ -1,4 +1,4 @@
-import { Lists, Tasks, User } from "@prisma/client";
+import { Lists, ListShares, Tasks, User } from "@prisma/client";
 import { HttpReponse, HttpRequest } from "../protocols";
 import { CreateUserParams } from "../../types/user";
 import { CreateListParams } from "../../types/list";
@@ -37,5 +37,9 @@ export interface IDeleteListController {
 }
 
 export interface IShareListController {
-  execute(listId: string, userId: string): Promise<HttpReponse<Lists>>;
+  execute(
+    listId: string,
+    userId: string,
+    can_edit: boolean,
+  ): Promise<HttpReponse<ListShares>>;
 }

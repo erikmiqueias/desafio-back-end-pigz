@@ -1,4 +1,4 @@
-import { Lists, Tasks, User } from "@prisma/client";
+import { Lists, ListShares, Tasks, User } from "@prisma/client";
 import { CreateUserParams } from "../../types/user";
 import { CreateListParams } from "../../types/list";
 import { CreateTaskParams } from "../../types/tasks";
@@ -28,5 +28,9 @@ export interface IDeleteListUseCase {
 }
 
 export interface IShareListUseCase {
-  execute(listId: string, userId: string): Promise<Lists>;
+  execute(
+    listId: string,
+    userId: string,
+    can_edit: boolean,
+  ): Promise<ListShares>;
 }

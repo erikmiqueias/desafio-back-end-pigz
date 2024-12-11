@@ -2,6 +2,7 @@ import { Lists, Tasks, User } from "@prisma/client";
 import { CreateUserParams } from "../../types/user";
 import { CreateListParams } from "../../types/list";
 import { CreateTaskParams } from "../../types/tasks";
+import { ShareListResponse } from "../../types/share-list";
 
 export interface IPostgresCreateUserRepository {
   execute(params: CreateUserParams): Promise<User>;
@@ -28,5 +29,9 @@ export interface IPostgresDeleteListRepository {
 }
 
 export interface IPostgresShareListRepository {
-  execute(listId: string, userId: string): Promise<Lists>;
+  execute(
+    listId: string,
+    userId: string,
+    can_edit: boolean,
+  ): Promise<ShareListResponse>;
 }

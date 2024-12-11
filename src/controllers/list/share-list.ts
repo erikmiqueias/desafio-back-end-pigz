@@ -1,11 +1,15 @@
-import { Lists } from "@prisma/client";
+import { ListShares } from "@prisma/client";
 import { IShareListController } from "../../helpers/controllers/protocols";
 import { HttpReponse } from "../../helpers/protocols";
 import { IShareListUseCase } from "../../helpers/use-case/protocols";
 
 export class ShareListController implements IShareListController {
   constructor(private readonly shareListUseCase: IShareListUseCase) {}
-  async execute(listId: string, userId: string): Promise<HttpReponse<Lists>> {
+  async execute(
+    listId: string,
+    userId: string,
+    can_edit: boolean,
+  ): Promise<HttpReponse<ListShares>> {
     try {
       if (!listId || !userId) {
         return {
@@ -14,7 +18,11 @@ export class ShareListController implements IShareListController {
         };
       }
 
-      const listShared = await this.shareListUseCase.execute(listId, userId);
+      const listShared = await this.shareListUseCase.execute(
+        listId,
+        userId,
+        can_edit,
+      );
 
       if (!listShared) {
         return {
