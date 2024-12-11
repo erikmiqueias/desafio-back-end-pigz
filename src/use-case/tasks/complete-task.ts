@@ -12,7 +12,7 @@ export class CompleteTaskUseCase implements ICompleteTaskUseCase {
       throw new Error("An unknown error occurred");
     }
 
-    if (!is_completed) {
+    if (is_completed === undefined) {
       throw new Error("An unknown error occurred");
     }
 
