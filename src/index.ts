@@ -1,26 +1,32 @@
 import express from "express";
 import { config } from "dotenv";
-import { CreateUserController } from "./controllers/user/create-user";
-import { CreateUserUseCase } from "./use-case/user/create-user";
-import { PostgresCreateUserRepository } from "./repositories/user/create-user";
-import { PostgresCreateListRepository } from "./repositories/list/create-list";
-import { CreateListUseCase } from "./use-case/list/create-list";
-import { CreateListController } from "./controllers/list/create-list";
-import { PostgresCreateTaskRepository } from "./repositories/tasks/create-tasks";
-import { CreateTaskUseCase } from "./use-case/tasks/create-task";
-import { CreateTaskController } from "./controllers/task/create-task";
-import { PostgresDeleteListRepository } from "./repositories/list/delete-list";
-import { DeleteListUseCase } from "./use-case/list/delete-list";
-import { DeleteListController } from "./controllers/list/delete-list";
-import { PostgresCompleteTaskRepository } from "./repositories/tasks/complete-task";
-import { CompleteTaskUseCase } from "./use-case/tasks/complete-task";
-import { CompleteTaskController } from "./controllers/task/complete-task";
-import { DeleteTaskController } from "./controllers/task/delete-task";
-import { PostgresDeleteTaskRepository } from "./repositories/tasks/delete-task";
-import { DeleteTaskUseCase } from "./use-case/tasks/delete-task";
-import { ShareListController } from "./controllers/list/share-list";
-import { PostgresShareListRepository } from "./repositories/list/share-list";
-import { ShareListUseCase } from "./use-case/list/share-list";
+import {
+  CreateUserController,
+  CreateListController,
+  CreateTaskController,
+  CompleteTaskController,
+  DeleteListController,
+  DeleteTaskController,
+  ShareListController,
+} from "./controllers/index";
+import {
+  CreateUserUseCase,
+  CreateListUseCase,
+  CreateTaskUseCase,
+  CompleteTaskUseCase,
+  DeleteTaskUseCase,
+  ShareListUseCase,
+  DeleteListUseCase,
+} from "./use-case/index";
+import {
+  PostgresCreateUserRepository,
+  PostgresCreateTaskRepository,
+  PostgresCreateListRepository,
+  PostgresDeleteListRepository,
+  PostgresCompleteTaskRepository,
+  PostgresDeleteTaskRepository,
+  PostgresShareListRepository,
+} from "./repositories/index";
 import { authMiddleware, generateToken } from "./middlewares/auth/auth";
 
 config();
