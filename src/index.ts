@@ -21,14 +21,16 @@ import { DeleteTaskUseCase } from "./use-case/tasks/delete-task";
 import { ShareListController } from "./controllers/list/share-list";
 import { PostgresShareListRepository } from "./repositories/list/share-list";
 import { ShareListUseCase } from "./use-case/list/share-list";
+import { authMiddleware, generateToken } from "./middlewares/auth/auth";
 
 config();
+
 const app = express();
 const PORT = process.env.PORT;
 
 app.use(express.json());
 
-app.post("/users", async (req, res) => {
+app.post("/users", authMiddleware, async (req, res) => {
   const createUserRepository = new PostgresCreateUserRepository();
   const createUserUseCase = new CreateUserUseCase(createUserRepository);
   const createUserController = new CreateUserController(createUserUseCase);
@@ -36,6 +38,18 @@ app.post("/users", async (req, res) => {
   const { statusCode, body } = await createUserController.execute(req);
 
   res.status(statusCode).send(body);
+});
+
+app.post("/generate-token", (req, res): void => {
+  const { email, id } = req.body;
+
+  if (!email || !id) {
+    res.status(400).send("Missing parameters");
+    return;
+  }
+
+  const token = generateToken({ id, email });
+  res.status(200).send({ token });
 });
 
 app.post("/lists/:id", async (req, res) => {
