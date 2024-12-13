@@ -28,6 +28,10 @@ export interface IPostgresDeleteListRepository {
   execute(listId: string): Promise<Lists>;
 }
 
+export interface IPostgresGetUserByEmailRepository {
+  execute(email: string): Promise<User>;
+}
+
 export interface IPostgresShareListRepository {
   execute(
     listId: string,
