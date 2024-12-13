@@ -34,3 +34,7 @@ export interface IShareListUseCase {
     can_edit: boolean,
   ): Promise<ListShares>;
 }
+
+export interface IGetUserByEmailUseCase {
+  execute(email: string): Promise<User>;
+}
