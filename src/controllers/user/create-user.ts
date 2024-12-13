@@ -1,12 +1,13 @@
 import { User } from "@prisma/client";
 import { ICreateUserController } from "../../helpers/controllers/protocols";
 import { HttpRequest, HttpReponse } from "../../helpers/protocols";
-import { ICreateUserUseCase } from "../../helpers/use-case/protocols";
 import validator from "validator";
 import { CreateUserParams } from "../../types/user";
+import { CreateUserUseCase } from "../../use-case";
+import { EmailAlreadyExists } from "../../errors/errors";
 
 export class CreateUserController implements ICreateUserController {
-  constructor(private readonly createUserUseCase: ICreateUserUseCase) {}
+  constructor(private readonly createUserUseCase: CreateUserUseCase) {}
   async execute(
     httpRequest: HttpRequest<CreateUserParams>,
   ): Promise<HttpReponse<User>> {
@@ -27,7 +28,6 @@ export class CreateUserController implements ICreateUserController {
           body: "Invalid email",
         };
       }
-
       const userCreated = await this.createUserUseCase.execute(user);
 
       return {
@@ -35,6 +35,12 @@ export class CreateUserController implements ICreateUserController {
         body: userCreated,
       };
     } catch (error) {
+      if (error instanceof EmailAlreadyExists) {
+        return {
+          statusCode: 400,
+          body: error.message,
+        };
+      }
       return {
         statusCode: 500,
         body: error,

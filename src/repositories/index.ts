@@ -7,3 +7,4 @@ export * from "./tasks/delete-task";
 export * from "./tasks/complete-task";
 
 export * from "./user/create-user";
+export * from "./user/get-email-by-id";

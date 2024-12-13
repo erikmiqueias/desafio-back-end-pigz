@@ -2,13 +2,27 @@ import { User } from "@prisma/client";
 import { ICreateUserUseCase } from "../../helpers/use-case/protocols";
 import { CreateUserParams } from "../../types/user";
 import { v4 as uuidv4 } from "uuid";
-import { IPostgresCreateUserRepository } from "../../helpers/repositories/protocols";
+import {
+  IPostgresCreateUserRepository,
+  IPostgresGetUserByEmailRepository,
+} from "../../helpers/repositories/protocols";
 import bcrypt from "bcrypt";
+import { EmailAlreadyExists } from "../../errors/errors";
 export class CreateUserUseCase implements ICreateUserUseCase {
   constructor(
     private readonly postgresCreateUserRepository: IPostgresCreateUserRepository,
+    private readonly postgresGetUserByEmailRepository: IPostgresGetUserByEmailRepository,
   ) {}
   async execute(createUserParams: CreateUserParams): Promise<User> {
+    const emailAlreadyExists =
+      await this.postgresGetUserByEmailRepository.execute(
+        createUserParams.email,
+      );
+
+    if (emailAlreadyExists) {
+      throw new EmailAlreadyExists(createUserParams.email);
+    }
+
     const userId = uuidv4();
     const hashdePassword = await bcrypt.hash(createUserParams.password, 10);
 

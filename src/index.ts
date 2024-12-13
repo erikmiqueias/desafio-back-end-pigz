@@ -26,6 +26,7 @@ import {
   PostgresCompleteTaskRepository,
   PostgresDeleteTaskRepository,
   PostgresShareListRepository,
+  PostgresGetUserByEmailRepository,
 } from "./repositories/index";
 import { authMiddleware, generateToken } from "./middlewares/auth/auth";
 
@@ -37,8 +38,12 @@ const PORT = process.env.PORT;
 app.use(express.json());
 
 app.post("/users", authMiddleware, async (req, res) => {
+  const getUserByEmailRepository = new PostgresGetUserByEmailRepository();
   const createUserRepository = new PostgresCreateUserRepository();
-  const createUserUseCase = new CreateUserUseCase(createUserRepository);
+  const createUserUseCase = new CreateUserUseCase(
+    createUserRepository,
+    getUserByEmailRepository,
+  );
   const createUserController = new CreateUserController(createUserUseCase);
 
   const { statusCode, body } = await createUserController.execute(req);
