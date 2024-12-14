@@ -1,16 +1,19 @@
 import {
   CreateListController,
+  CreateTaskController,
   CreateUserController,
   DeleteListController,
 } from "../controllers";
 import {
   PostgresCreateListRepository,
+  PostgresCreateTaskRepository,
   PostgresCreateUserRepository,
   PostgresDeleteListRepository,
   PostgresGetUserByEmailRepository,
 } from "../repositories";
 import {
   CreateListUseCase,
+  CreateTaskUseCase,
   CreateUserUseCase,
   DeleteListUseCase,
 } from "../use-case";
@@ -41,4 +44,12 @@ export const makeDeleteListController = () => {
   const deleteListController = new DeleteListController(deleteListUseCase);
 
   return deleteListController;
+};
+
+export const makeCreateTaskController = () => {
+  const createTaskRepository = new PostgresCreateTaskRepository();
+  const createTaskUseCase = new CreateTaskUseCase(createTaskRepository);
+  const createTaskController = new CreateTaskController(createTaskUseCase);
+
+  return createTaskController;
 };
