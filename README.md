@@ -28,39 +28,37 @@ Este repositório contém a implementação de um desafio back-end utilizando te
 
 1. Clone este repositório:
    ```bash
-   git clone https://github.com/seu-usuario/desafio-pigz.git
+   git clone https://github.com/erikmiqueias/desafio-back-end-pigz.git
    ```
 2. Acesse o diretório do projeto:
    ```bash
-   cd desafio-pigz
+   cd desafio-back-end-pigz
    ```
 3. Inicie os containers:
    ```bash
-   docker-compose up -d
+   docker compose up -d
    ```
 4. Instale as dependências:
+
    ```bash
    npm install
    # ou
    yarn install
-   ```
-5. Execute as migrações do Prisma:
-
-   ```bash
-   npx prisma migrate dev
+   # ou
+   yarn
    ```
 
-6. Crie uma arquivo .env na raíz do projeto e defina suas varíaveis de ambiente baseado no arquivo .env.example:
+5. Crie uma arquivo .env na raíz do projeto e defina suas varíaveis de ambiente baseado no arquivo .env.example:
 
    ```bash
     .env
    ```
 
-7. Inicie a aplicação:
+6. Inicie a aplicação:
    ```bash
-   npm run start
+   npm run start:dev
    # ou
-   yarn start
+   yarn start:dev
    ```
 
 ## Estrutura do Projeto
@@ -77,6 +75,11 @@ Este repositório contém a implementação de um desafio back-end utilizando te
   |-- use-case       # Casos de uso que representam a lógica de negócios
   index.ts           # Ponto de entrada da aplicação
 ```
+
+## Testando o projeto
+
+1. Abra um sistema de clientes de APi como Postman ou Insomnia
+2. Após todas as configurações o projeto estará rodando na porta http://localhost:8080/ENDPOINT
 
 ## Melhorias Futuras
 
