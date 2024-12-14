@@ -22,7 +22,6 @@ Este repositório contém a implementação de um desafio back-end utilizando te
 ### Requisitos
 
 - Docker e Docker Compose instalados.
-- Node.js (v14 ou superior) e npm/yarn.
 
 ### Passos para Execução
 
@@ -34,46 +33,31 @@ Este repositório contém a implementação de um desafio back-end utilizando te
    ```bash
    cd desafio-back-end-pigz
    ```
-3. Inicie os containers:
+3. Inicie os containers (todo o ambiente foi montado em docker):
    ```bash
    docker compose up -d
    ```
-4. Instale as dependências:
+4. Acesse o terminal do container para instalar depêndencias manualmente e executar comandos (se necessário)
 
    ```bash
-   npm install
-   # ou
-   yarn install
-   # ou
-   yarn
-   ```
-
-5. Crie uma arquivo .env na raíz do projeto e defina suas varíaveis de ambiente baseado no arquivo .env.example:
-
-   ```bash
-    .env
-   ```
-
-6. Inicie a aplicação:
-   ```bash
-   npm run start:dev
-   # ou
-   yarn start:dev
+    docker exec -it nome_do_container bash
    ```
 
 ## Estrutura do Projeto
 
 ```
+
 /src
-  |-- controllers    # Controladores da aplicação
-  |-- errors         # Manipulação de erros e exceções
-  |-- factories      # Factories para criar instâncias de classes
-  |-- helpers        # Interface utilitárias para suporte ao código
-  |-- middlewares    # Interceptadores para requisições HTTP (apenas lógica de autorização com JWT)
-  |-- repositories   # Implementações do Repository Pattern para acesso a dados
-  |-- types          # Definições de tipos e interfaces
-  |-- use-case       # Casos de uso que representam a lógica de negócios
-  index.ts           # Ponto de entrada da aplicação
+|-- controllers # Controladores da aplicação
+|-- errors # Manipulação de erros e exceções
+|-- factories # Factories para criar instâncias de classes
+|-- helpers # Interface utilitárias para suporte ao código
+|-- middlewares # Interceptadores para requisições HTTP (apenas lógica de autorização com JWT)
+|-- repositories # Implementações do Repository Pattern para acesso a dados
+|-- types # Definições de tipos e interfaces
+|-- use-case # Casos de uso que representam a lógica de negócios
+index.ts # Ponto de entrada da aplicação
+
 ```
 
 ## Testando o projeto
