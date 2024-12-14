@@ -27,15 +27,15 @@ app.post("/users", authMiddleware, async (req, res) => {
 });
 
 app.post("/generate-token", (req, res): void => {
-  const { email, id } = req.body;
+  const { token } = req.body;
 
-  if (!email || !id) {
+  if (!token) {
     res.status(400).send("Missing parameters");
     return;
   }
 
-  const token = generateToken({ id, email });
-  res.status(200).send({ token });
+  const generatedToken = generateToken({ token });
+  res.status(200).send({ generateToken: generatedToken });
 });
 
 app.post("/lists/:id", async (req, res) => {

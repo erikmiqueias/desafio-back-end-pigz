@@ -35,7 +35,7 @@ export const authMiddleware = (
   }
 };
 
-export const generateToken = (payload: { id: string; email: string }) => {
+export const generateToken = (payload: { token: string }) => {
   const secret = process.env.JWT_SECRET!;
   const acessToken = jwt.sign(payload, secret);
   return acessToken;
