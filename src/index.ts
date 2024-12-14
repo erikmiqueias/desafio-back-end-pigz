@@ -1,11 +1,5 @@
 import express from "express";
 import { config } from "dotenv";
-import { DeleteTaskController, ShareListController } from "./controllers/index";
-import { DeleteTaskUseCase, ShareListUseCase } from "./use-case/index";
-import {
-  PostgresDeleteTaskRepository,
-  PostgresShareListRepository,
-} from "./repositories/index";
 import { authMiddleware, generateToken } from "./middlewares/auth/auth";
 import {
   makeCompleteTaskController,
@@ -13,6 +7,8 @@ import {
   makeCreateTaskController,
   makeCreateUserController,
   makeDeleteListController,
+  makeDeleteTaskController,
+  makeShareListController,
 } from "./factories";
 
 config();
@@ -86,10 +82,7 @@ app.patch("/tasks/:id", async (req, res) => {
 });
 
 app.delete("/tasks/:id", async (req, res) => {
-  const deleteTaskRepository = new PostgresDeleteTaskRepository();
-  const deleteTaskUseCase = new DeleteTaskUseCase(deleteTaskRepository);
-  const deleteTaskController = new DeleteTaskController(deleteTaskUseCase);
-
+  const deleteTaskController = makeDeleteTaskController();
   const { statusCode, body } = await deleteTaskController.execute(
     req.params.id,
   );
@@ -98,9 +91,7 @@ app.delete("/tasks/:id", async (req, res) => {
 });
 
 app.patch("/lists/:id/share", async (req, res) => {
-  const shareListRepository = new PostgresShareListRepository();
-  const shareListUseCase = new ShareListUseCase(shareListRepository);
-  const shareListController = new ShareListController(shareListUseCase);
+  const shareListController = makeShareListController();
 
   const { statusCode, body } = await shareListController.execute(
     req.params.id,

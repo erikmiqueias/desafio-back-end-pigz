@@ -4,6 +4,8 @@ import {
   CreateTaskController,
   CreateUserController,
   DeleteListController,
+  DeleteTaskController,
+  ShareListController,
 } from "../controllers";
 import {
   PostgresCompleteTaskRepository,
@@ -11,7 +13,9 @@ import {
   PostgresCreateTaskRepository,
   PostgresCreateUserRepository,
   PostgresDeleteListRepository,
+  PostgresDeleteTaskRepository,
   PostgresGetUserByEmailRepository,
+  PostgresShareListRepository,
 } from "../repositories";
 import {
   CompleteTaskUseCase,
@@ -19,6 +23,8 @@ import {
   CreateTaskUseCase,
   CreateUserUseCase,
   DeleteListUseCase,
+  DeleteTaskUseCase,
+  ShareListUseCase,
 } from "../use-case";
 
 export const makeCreateUserController = () => {
@@ -65,4 +71,20 @@ export const makeCompleteTaskController = () => {
   );
 
   return completeTaskController;
+};
+
+export const makeDeleteTaskController = () => {
+  const deleteTaskRepository = new PostgresDeleteTaskRepository();
+  const deleteTaskUseCase = new DeleteTaskUseCase(deleteTaskRepository);
+  const deleteTaskController = new DeleteTaskController(deleteTaskUseCase);
+
+  return deleteTaskController;
+};
+
+export const makeShareListController = () => {
+  const shareListRepository = new PostgresShareListRepository();
+  const shareListUseCase = new ShareListUseCase(shareListRepository);
+  const shareListController = new ShareListController(shareListUseCase);
+
+  return shareListController;
 };
