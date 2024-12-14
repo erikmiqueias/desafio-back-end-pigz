@@ -1,10 +1,12 @@
 import {
+  CompleteTaskController,
   CreateListController,
   CreateTaskController,
   CreateUserController,
   DeleteListController,
 } from "../controllers";
 import {
+  PostgresCompleteTaskRepository,
   PostgresCreateListRepository,
   PostgresCreateTaskRepository,
   PostgresCreateUserRepository,
@@ -12,6 +14,7 @@ import {
   PostgresGetUserByEmailRepository,
 } from "../repositories";
 import {
+  CompleteTaskUseCase,
   CreateListUseCase,
   CreateTaskUseCase,
   CreateUserUseCase,
@@ -52,4 +55,14 @@ export const makeCreateTaskController = () => {
   const createTaskController = new CreateTaskController(createTaskUseCase);
 
   return createTaskController;
+};
+
+export const makeCompleteTaskController = () => {
+  const completeTaskRepository = new PostgresCompleteTaskRepository();
+  const completeTaskUseCase = new CompleteTaskUseCase(completeTaskRepository);
+  const completeTaskController = new CompleteTaskController(
+    completeTaskUseCase,
+  );
+
+  return completeTaskController;
 };

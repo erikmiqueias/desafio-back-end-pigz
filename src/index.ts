@@ -1,22 +1,14 @@
 import express from "express";
 import { config } from "dotenv";
+import { DeleteTaskController, ShareListController } from "./controllers/index";
+import { DeleteTaskUseCase, ShareListUseCase } from "./use-case/index";
 import {
-  CompleteTaskController,
-  DeleteTaskController,
-  ShareListController,
-} from "./controllers/index";
-import {
-  CompleteTaskUseCase,
-  DeleteTaskUseCase,
-  ShareListUseCase,
-} from "./use-case/index";
-import {
-  PostgresCompleteTaskRepository,
   PostgresDeleteTaskRepository,
   PostgresShareListRepository,
 } from "./repositories/index";
 import { authMiddleware, generateToken } from "./middlewares/auth/auth";
 import {
+  makeCompleteTaskController,
   makeCreateListController,
   makeCreateTaskController,
   makeCreateUserController,
@@ -83,11 +75,7 @@ app.post("/lists/:id/tasks", async (req, res) => {
 });
 
 app.patch("/tasks/:id", async (req, res) => {
-  const completeTaskRepository = new PostgresCompleteTaskRepository();
-  const completeTaskUseCase = new CompleteTaskUseCase(completeTaskRepository);
-  const completeTaskController = new CompleteTaskController(
-    completeTaskUseCase,
-  );
+  const completeTaskController = makeCompleteTaskController();
 
   const { statusCode, body } = await completeTaskController.execute(
     req.params.id,
