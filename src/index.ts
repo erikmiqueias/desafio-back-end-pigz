@@ -1,34 +1,29 @@
 import express from "express";
 import { config } from "dotenv";
 import {
-  CreateUserController,
-  CreateListController,
   CreateTaskController,
   CompleteTaskController,
-  DeleteListController,
   DeleteTaskController,
   ShareListController,
 } from "./controllers/index";
 import {
-  CreateUserUseCase,
-  CreateListUseCase,
   CreateTaskUseCase,
   CompleteTaskUseCase,
   DeleteTaskUseCase,
   ShareListUseCase,
-  DeleteListUseCase,
 } from "./use-case/index";
 import {
-  PostgresCreateUserRepository,
   PostgresCreateTaskRepository,
-  PostgresCreateListRepository,
-  PostgresDeleteListRepository,
   PostgresCompleteTaskRepository,
   PostgresDeleteTaskRepository,
   PostgresShareListRepository,
-  PostgresGetUserByEmailRepository,
 } from "./repositories/index";
 import { authMiddleware, generateToken } from "./middlewares/auth/auth";
+import {
+  makeCreateListController,
+  makeCreateUserController,
+  makeDeleteListController,
+} from "./factories";
 
 config();
 
@@ -38,13 +33,7 @@ const PORT = process.env.PORT;
 app.use(express.json());
 
 app.post("/users", authMiddleware, async (req, res) => {
-  const getUserByEmailRepository = new PostgresGetUserByEmailRepository();
-  const createUserRepository = new PostgresCreateUserRepository();
-  const createUserUseCase = new CreateUserUseCase(
-    createUserRepository,
-    getUserByEmailRepository,
-  );
-  const createUserController = new CreateUserController(createUserUseCase);
+  const createUserController = makeCreateUserController();
 
   const { statusCode, body } = await createUserController.execute(req);
 
@@ -64,9 +53,7 @@ app.post("/generate-token", (req, res): void => {
 });
 
 app.post("/lists/:id", async (req, res) => {
-  const createListRepository = new PostgresCreateListRepository();
-  const createListUseCase = new CreateListUseCase(createListRepository);
-  const createListController = new CreateListController(createListUseCase);
+  const createListController = makeCreateListController();
 
   const { statusCode, body } = await createListController.execute(
     req.params.id,
@@ -77,9 +64,7 @@ app.post("/lists/:id", async (req, res) => {
 });
 
 app.delete("/lists/:id", async (req, res) => {
-  const deleteListRepository = new PostgresDeleteListRepository();
-  const deleteListUseCase = new DeleteListUseCase(deleteListRepository);
-  const deleteListController = new DeleteListController(deleteListUseCase);
+  const deleteListController = makeDeleteListController();
 
   const { statusCode, body } = await deleteListController.execute(
     req.params.id,
