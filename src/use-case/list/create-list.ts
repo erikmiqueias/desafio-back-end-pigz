@@ -1,7 +1,7 @@
 import { Lists } from "@prisma/client";
-import { ICreateListUseCase } from "../../helpers/use-case/protocols";
+import { ICreateListUseCase } from "../../interfaces/use-case/protocols";
 import { CreateListParams } from "../../types/list";
-import { IPostgresCreateListRepository } from "../../helpers/repositories/protocols";
+import { IPostgresCreateListRepository } from "../../interfaces/repositories/protocols";
 import { v4 as uuidv4 } from "uuid";
 
 export class CreateListUseCase implements ICreateListUseCase {

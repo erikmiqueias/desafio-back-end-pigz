@@ -1,8 +1,8 @@
 import { Lists } from "@prisma/client";
-import { ICreateListController } from "../../helpers/controllers/protocols";
-import { HttpRequest, HttpReponse } from "../../helpers/protocols";
+import { ICreateListController } from "../../interfaces/controllers/protocols";
+import { HttpRequest, HttpReponse } from "../../interfaces/protocols";
 import { CreateListParams } from "../../types/list";
-import { ICreateListUseCase } from "../../helpers/use-case/protocols";
+import { ICreateListUseCase } from "../../interfaces/use-case/protocols";
 
 export class CreateListController implements ICreateListController {
   constructor(private readonly createListUseCase: ICreateListUseCase) {}

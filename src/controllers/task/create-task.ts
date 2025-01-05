@@ -1,8 +1,8 @@
 import { Tasks } from "@prisma/client";
-import { ICreateTaskController } from "../../helpers/controllers/protocols";
-import { HttpRequest, HttpReponse } from "../../helpers/protocols";
+import { ICreateTaskController } from "../../interfaces/controllers/protocols";
+import { HttpRequest, HttpReponse } from "../../interfaces/protocols";
 import { CreateTaskParams } from "../../types/tasks";
-import { ICreateTaskUseCase } from "../../helpers/use-case/protocols";
+import { ICreateTaskUseCase } from "../../interfaces/use-case/protocols";
 
 export class CreateTaskController implements ICreateTaskController {
   constructor(private readonly createTaskUseCase: ICreateTaskUseCase) {}

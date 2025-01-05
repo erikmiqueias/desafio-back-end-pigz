@@ -1,5 +1,5 @@
 import { Tasks } from "@prisma/client";
-import { IPostgresCompleteTaskRepository } from "../../helpers/repositories/protocols";
+import { IPostgresCompleteTaskRepository } from "../../interfaces/repositories/protocols";
 import { prisma } from "../../../prisma/prisma";
 
 export class PostgresCompleteTaskRepository

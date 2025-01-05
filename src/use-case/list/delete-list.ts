@@ -1,6 +1,6 @@
 import { Lists } from "@prisma/client";
-import { IDeleteListUseCase } from "../../helpers/use-case/protocols";
-import { IPostgresDeleteListRepository } from "../../helpers/repositories/protocols";
+import { IDeleteListUseCase } from "../../interfaces/use-case/protocols";
+import { IPostgresDeleteListRepository } from "../../interfaces/repositories/protocols";
 
 export class DeleteListUseCase implements IDeleteListUseCase {
   constructor(

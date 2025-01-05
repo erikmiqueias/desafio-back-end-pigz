@@ -1,4 +1,4 @@
-import { IPostgresShareListRepository } from "../../helpers/repositories/protocols";
+import { IPostgresShareListRepository } from "../../interfaces/repositories/protocols";
 import { prisma } from "../../../prisma/prisma";
 import { ShareListResponse } from "../../types/share-list";
 

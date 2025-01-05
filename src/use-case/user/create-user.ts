@@ -1,11 +1,11 @@
 import { User } from "@prisma/client";
-import { ICreateUserUseCase } from "../../helpers/use-case/protocols";
+import { ICreateUserUseCase } from "../../interfaces/use-case/protocols";
 import { CreateUserParams } from "../../types/user";
 import { v4 as uuidv4 } from "uuid";
 import {
   IPostgresCreateUserRepository,
   IPostgresGetUserByEmailRepository,
-} from "../../helpers/repositories/protocols";
+} from "../../interfaces/repositories/protocols";
 import bcrypt from "bcrypt";
 import { EmailAlreadyExists } from "../../errors/errors";
 export class CreateUserUseCase implements ICreateUserUseCase {

@@ -1,7 +1,7 @@
 import { Tasks } from "@prisma/client";
-import { IDeleteTaskController } from "../../helpers/controllers/protocols";
-import { HttpReponse } from "../../helpers/protocols";
-import { IDeleteTaskUseCase } from "../../helpers/use-case/protocols";
+import { IDeleteTaskController } from "../../interfaces/controllers/protocols";
+import { HttpReponse } from "../../interfaces/protocols";
+import { IDeleteTaskUseCase } from "../../interfaces/use-case/protocols";
 
 export class DeleteTaskController implements IDeleteTaskController {
   constructor(private readonly deleteTaskUseCase: IDeleteTaskUseCase) {}

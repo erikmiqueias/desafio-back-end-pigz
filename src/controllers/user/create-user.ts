@@ -1,6 +1,6 @@
 import { User } from "@prisma/client";
-import { ICreateUserController } from "../../helpers/controllers/protocols";
-import { HttpRequest, HttpReponse } from "../../helpers/protocols";
+import { ICreateUserController } from "../../interfaces/controllers/protocols";
+import { HttpRequest, HttpReponse } from "../../interfaces/protocols";
 import validator from "validator";
 import { CreateUserParams } from "../../types/user";
 import { CreateUserUseCase } from "../../use-case";

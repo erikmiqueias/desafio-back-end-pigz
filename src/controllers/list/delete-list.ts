@@ -1,7 +1,7 @@
 import { Lists } from "@prisma/client";
-import { IDeleteListController } from "../../helpers/controllers/protocols";
-import { HttpReponse } from "../../helpers/protocols";
-import { IDeleteListUseCase } from "../../helpers/use-case/protocols";
+import { IDeleteListController } from "../../interfaces/controllers/protocols";
+import { HttpReponse } from "../../interfaces/protocols";
+import { IDeleteListUseCase } from "../../interfaces/use-case/protocols";
 
 export class DeleteListController implements IDeleteListController {
   constructor(private readonly deleteListUseCase: IDeleteListUseCase) {}

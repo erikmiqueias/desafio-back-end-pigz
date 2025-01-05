@@ -1,5 +1,5 @@
 import { Tasks } from "@prisma/client";
-import { IPostgresCreateTaskRepository } from "../../helpers/repositories/protocols";
+import { IPostgresCreateTaskRepository } from "../../interfaces/repositories/protocols";
 import { CreateTaskParams } from "../../types/tasks";
 import { prisma } from "../../../prisma/prisma";
 

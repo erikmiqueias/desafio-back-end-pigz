@@ -1,6 +1,6 @@
 import { ListShares } from "@prisma/client";
-import { IShareListUseCase } from "../../helpers/use-case/protocols";
-import { IPostgresShareListRepository } from "../../helpers/repositories/protocols";
+import { IShareListUseCase } from "../../interfaces/use-case/protocols";
+import { IPostgresShareListRepository } from "../../interfaces/repositories/protocols";
 
 export class ShareListUseCase implements IShareListUseCase {
   constructor(

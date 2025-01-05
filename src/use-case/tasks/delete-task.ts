@@ -1,6 +1,6 @@
 import { Tasks } from "@prisma/client";
-import { IDeleteTaskUseCase } from "../../helpers/use-case/protocols";
-import { IPostgresDeleteTaskRepository } from "../../helpers/repositories/protocols";
+import { IDeleteTaskUseCase } from "../../interfaces/use-case/protocols";
+import { IPostgresDeleteTaskRepository } from "../../interfaces/repositories/protocols";
 
 export class DeleteTaskUseCase implements IDeleteTaskUseCase {
   constructor(

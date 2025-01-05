@@ -1,5 +1,5 @@
 import { Tasks } from "@prisma/client";
-import { IPostgresDeleteTaskRepository } from "../../helpers/repositories/protocols";
+import { IPostgresDeleteTaskRepository } from "../../interfaces/repositories/protocols";
 import { prisma } from "../../../prisma/prisma";
 
 export class PostgresDeleteTaskRepository

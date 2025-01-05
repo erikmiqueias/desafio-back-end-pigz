@@ -1,5 +1,5 @@
 import { Lists } from "@prisma/client";
-import { IPostgresDeleteListRepository } from "../../helpers/repositories/protocols";
+import { IPostgresDeleteListRepository } from "../../interfaces/repositories/protocols";
 import { prisma } from "../../../prisma/prisma";
 
 export class PostgresDeleteListRepository

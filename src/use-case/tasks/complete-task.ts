@@ -1,5 +1,5 @@
 import { Tasks } from "@prisma/client";
-import { ICompleteTaskUseCase } from "../../helpers/use-case/protocols";
+import { ICompleteTaskUseCase } from "../../interfaces/use-case/protocols";
 import { PostgresCompleteTaskRepository } from "../../repositories/tasks/complete-task";
 
 export class CompleteTaskUseCase implements ICompleteTaskUseCase {

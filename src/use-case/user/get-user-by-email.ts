@@ -1,6 +1,6 @@
 import { User } from "@prisma/client";
-import { IGetUserByEmailUseCase } from "../../helpers/use-case/protocols";
-import { IPostgresGetUserByEmailRepository } from "../../helpers/repositories/protocols";
+import { IGetUserByEmailUseCase } from "../../interfaces/use-case/protocols";
+import { IPostgresGetUserByEmailRepository } from "../../interfaces/repositories/protocols";
 
 export class GetUserByEmailUseCase implements IGetUserByEmailUseCase {
   constructor(

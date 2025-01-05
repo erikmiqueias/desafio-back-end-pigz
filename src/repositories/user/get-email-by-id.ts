@@ -1,6 +1,6 @@
 import { User } from "@prisma/client";
 import { prisma } from "../../../prisma/prisma";
-import { IPostgresGetUserByEmailRepository } from "../../helpers/repositories/protocols";
+import { IPostgresGetUserByEmailRepository } from "../../interfaces/repositories/protocols";
 
 export class PostgresGetUserByEmailRepository
   implements IPostgresGetUserByEmailRepository

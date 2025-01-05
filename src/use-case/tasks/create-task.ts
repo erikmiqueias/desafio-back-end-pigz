@@ -1,7 +1,7 @@
 import { Tasks } from "@prisma/client";
-import { ICreateTaskUseCase } from "../../helpers/use-case/protocols";
+import { ICreateTaskUseCase } from "../../interfaces/use-case/protocols";
 import { CreateTaskParams } from "../../types/tasks";
-import { IPostgresCreateTaskRepository } from "../../helpers/repositories/protocols";
+import { IPostgresCreateTaskRepository } from "../../interfaces/repositories/protocols";
 
 export class CreateTaskUseCase implements ICreateTaskUseCase {
   constructor(

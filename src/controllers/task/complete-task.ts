@@ -1,7 +1,7 @@
 import { Tasks } from "@prisma/client";
-import { ICompleteTaskController } from "../../helpers/controllers/protocols";
-import { HttpReponse } from "../../helpers/protocols";
-import { ICompleteTaskUseCase } from "../../helpers/use-case/protocols";
+import { ICompleteTaskController } from "../../interfaces/controllers/protocols";
+import { HttpReponse } from "../../interfaces/protocols";
+import { ICompleteTaskUseCase } from "../../interfaces/use-case/protocols";
 
 export class CompleteTaskController implements ICompleteTaskController {
   constructor(private readonly completeTaskUseCase: ICompleteTaskUseCase) {}

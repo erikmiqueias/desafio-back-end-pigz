@@ -1,7 +1,7 @@
 import { ListShares } from "@prisma/client";
-import { IShareListController } from "../../helpers/controllers/protocols";
-import { HttpReponse } from "../../helpers/protocols";
-import { IShareListUseCase } from "../../helpers/use-case/protocols";
+import { IShareListController } from "../../interfaces/controllers/protocols";
+import { HttpReponse } from "../../interfaces/protocols";
+import { IShareListUseCase } from "../../interfaces/use-case/protocols";
 
 export class ShareListController implements IShareListController {
   constructor(private readonly shareListUseCase: IShareListUseCase) {}
