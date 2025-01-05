@@ -21,7 +21,7 @@ export const authMiddleware = (
       return;
     }
 
-    const secret = process.env.JWT_SECRET!; // Certifique-se de configurar a variável de ambiente
+    const secret = process.env.JWT_SECRET!;
     const decoded = jwt.verify(token, secret) as jwt.JwtPayload;
 
     req.body.id = decoded.id;
